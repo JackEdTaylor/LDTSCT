@@ -108,17 +108,17 @@ eval(parse(text=sprintf('form.nw <- %s ~ taskDev * nwDum + task_order + stim_lis
                         ', as.character(form[2]))))
 
 # Examine effect of task for category-relevant words
-m.cw <- lmer(form.cw, data = LDTSCT_DATA, control = lmerControl(optimizer = c("bobyqa")))
+m.cw <- glmer(form.cw, data = LDTSCT_DATA, family = binomial(logit), control = glmerControl(optimizer = c("bobyqa")))
 m.cw.int <- update(m.cw, .~. -taskDev)
 anova(m.cw, m.cw.int, test="Chi")
 
 # Examine effect of task for pseudowords
-m.pw <- lmer(form.pw, data = LDTSCT_DATA, control = lmerControl(optimizer = c("bobyqa")))
+m.pw <- glmer(form.pw, data = LDTSCT_DATA, family = binomial(logit), control = glmerControl(optimizer = c("bobyqa")))
 m.pw.int <- update(m.pw, .~. -taskDev)
 anova(m.pw, m.pw.int, test="Chi")
 
 # Examine effect of task for nonwords
-m.nw <- lmer(form.nw, data = LDTSCT_DATA, control = lmerControl(optimizer = c("bobyqa")))
+m.nw <- glmer(form.nw, data = LDTSCT_DATA, family = binomial(logit), control = glmerControl(optimizer = c("bobyqa")))
 m.nw.int <- update(m.nw, .~. -taskDev)
 anova(m.nw, m.nw.int, test="Chi")
 
